@@ -4,6 +4,8 @@ const {
   getAccount,
   getAccounts,
   updateAccount,
+  getAccountByMob,
+  updateAccountByMob
 } = require("../Controllers/accountControllers");
 const router = express.Router();
 
@@ -12,7 +14,7 @@ router.get("/", getAccounts);
 
 //get one account
 router.get("/:uid", getAccount);
-
+router.get("/mobile/:mobile",getAccountByMob);
 //post new account
 router.post("/", createNewAccount);
 
@@ -21,4 +23,5 @@ router.delete("/:uid", (req, res) => {
 });
 
 router.put("/:uid", updateAccount);
+router.put("/mobile/:mobile", updateAccountByMob);
 module.exports = router;
