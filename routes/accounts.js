@@ -5,16 +5,17 @@ const {
   getAccounts,
   updateAccount,
   getAccountByMob,
-  updateAccountByMob
+  updateAccountByMob,
 } = require("../Controllers/accountControllers");
 const router = express.Router();
-
+const multer = require("multer");
+const upload = multer();
 //get accounts
 router.get("/", getAccounts);
 
 //get one account
 router.get("/:uid", getAccount);
-router.get("/mobile/:mobile",getAccountByMob);
+router.get("/mobile/:mobile", getAccountByMob);
 //post new account
 router.post("/", createNewAccount);
 

@@ -27,4 +27,4 @@ mongoose
     console.log(err);
   });
 
-app.use("/api/accounts",accountRoutes);
+app.use("/api/accounts", accountRoutes);

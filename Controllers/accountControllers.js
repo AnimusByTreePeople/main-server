@@ -73,8 +73,7 @@ const updateAccount = async (req, res) => {
   //   );
   // }
   // console.log(account);
-  if (!account) 
-  return res.status(400).json({ error: "No account found" });
+  if (!account) return res.status(400).json({ error: "No account found" });
   res.status(200).json(account);
 };
 
@@ -92,10 +91,8 @@ const updateAccountByMob = async (req, res) => {
       returnOriginal: false,
     }
   );
- 
 
-  if (!account) 
-  return res.status(400).json({ error: "No account found" });
+  if (!account) return res.status(400).json({ error: "No account found" });
   res.status(200).json(account);
 };
 //exports
@@ -105,5 +102,5 @@ module.exports = {
   createNewAccount,
   updateAccount,
   getAccountByMob,
-  updateAccountByMob
+  updateAccountByMob,
 };
