@@ -18,6 +18,19 @@ const getAccount = async (req, res) => {
   }
   return res.status(200).json(account);
 };
+
+const getAccountByMob = async (req, res) => {
+  const { mobile } = req.params;
+  console.log(mobile);
+  const account = await Account.findOne({
+    mobile: mobile,
+  });
+  console.log(account);
+  if (!account) {
+    return res.status(404).json({ error: "Account not found" });
+  }
+  return res.status(200).json(account);
+};
 //create a new account
 const createNewAccount = async (req, res) => {
   const { name, score, mobile, UID } = req.body;
@@ -50,17 +63,39 @@ const updateAccount = async (req, res) => {
       returnOriginal: false,
     }
   );
-  if (!account) {
-    account = await Account.findOneAndUpdate(
-      { mobile: uid },
-      { ...req.body },
-      {
-        returnOriginal: false,
-      }
-    );
-  }
-  console.log(account);
-  if (!account) return res.status(400).json({ error: "No account found" });
+  // if (!account) {
+  //   account = await Account.findOneAndUpdate(
+  //     { mobile: mobile },
+  //     { ...req.body },
+  //     {
+  //       returnOriginal: false,
+  //     }
+  //   );
+  // }
+  // console.log(account);
+  if (!account) 
+  return res.status(400).json({ error: "No account found" });
+  res.status(200).json(account);
+};
+
+const updateAccountByMob = async (req, res) => {
+  const { mobile } = req.params;
+
+  console.log(mobile.lenght);
+
+  console.log({ ...req.body });
+  console.log({ mobile: mobile });
+  const account = await Account.findOneAndUpdate(
+    { mobile: mobile },
+    { ...req.body },
+    {
+      returnOriginal: false,
+    }
+  );
+ 
+
+  if (!account) 
+  return res.status(400).json({ error: "No account found" });
   res.status(200).json(account);
 };
 //exports
@@ -69,4 +104,6 @@ module.exports = {
   getAccounts,
   createNewAccount,
   updateAccount,
+  getAccountByMob,
+  updateAccountByMob
 };
