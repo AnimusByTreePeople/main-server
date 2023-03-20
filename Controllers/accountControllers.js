@@ -33,6 +33,7 @@ const getAccountByMob = async (req, res) => {
 };
 //create a new account
 const createNewAccount = async (req, res) => {
+  console.log("creating new account");
   const { name, score, mobile, UID } = req.body;
   try {
     const account = await Account.create({
