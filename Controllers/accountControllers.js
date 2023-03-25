@@ -33,6 +33,7 @@ const getAccountByMob = async (req, res) => {
 };
 //create a new account
 const createNewAccount = async (req, res) => {
+  console.log("creating new account");
   const { name, score, mobile, UID } = req.body;
   try {
     const account = await Account.create({
@@ -73,8 +74,7 @@ const updateAccount = async (req, res) => {
   //   );
   // }
   // console.log(account);
-  if (!account) 
-  return res.status(400).json({ error: "No account found" });
+  if (!account) return res.status(400).json({ error: "No account found" });
   res.status(200).json(account);
 };
 
@@ -92,10 +92,8 @@ const updateAccountByMob = async (req, res) => {
       returnOriginal: false,
     }
   );
- 
 
-  if (!account) 
-  return res.status(400).json({ error: "No account found" });
+  if (!account) return res.status(400).json({ error: "No account found" });
   res.status(200).json(account);
 };
 //exports
@@ -105,5 +103,5 @@ module.exports = {
   createNewAccount,
   updateAccount,
   getAccountByMob,
-  updateAccountByMob
+  updateAccountByMob,
 };
