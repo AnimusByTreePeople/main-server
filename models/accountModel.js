@@ -20,6 +20,10 @@ const accountSchema = new Schema(
       type: String,
       required: true,
     },
+    bagCount: {
+      type: Number,
+      default: 0,
+    },
     UID: {
       type: String,
       required: true,
