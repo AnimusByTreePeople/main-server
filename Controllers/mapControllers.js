@@ -12,6 +12,7 @@ const upload = multer({
 });
 
 const createMap = async (req, res) => {
+  console.log("Creating");
   const { uid } = req.params;
   const { name, map } = req.body;
   console.log(map);
@@ -31,5 +32,30 @@ const getMaps = async (req, res) => {
   const maps = await Map.find({}).sort({ createdAt: -1 });
   res.status(200).json(maps);
 };
-
-module.exports = { createMap, upload, getMaps };
+const getMap = async (req, res) => {
+  const { uid } = req.params;
+  const map = await Map.findOne({ UID: uid });
+  if (map) {
+    res.status(200).json(map);
+  } else {
+    res.status(200).json(null);
+  }
+};
+const updateMap = async (req, res) => {
+  const { uid } = req.params;
+  try {
+    const mapNew = await Map.findOneAndUpdate(
+      { UID: uid },
+      { ...req.body },
+      {
+        returnOriginal: false,
+      }
+    );
+    res.status(200).json(mapNew);
+    console.log("done");
+  } catch (e) {
+    console.log(e.message);
+    res.status(400).json({ error: e.message + "hi hi" });
+  }
+};
+module.exports = { createMap, upload, getMaps, getMap, updateMap };

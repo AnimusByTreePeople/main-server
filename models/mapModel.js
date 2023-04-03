@@ -8,8 +8,8 @@ const mapSchema = new Schema({
     required: true,
   },
   map: {
-    data: Buffer,
-    contentType: String,
+    type: String,
+    required: true,
   },
   UID: {
     type: String,
