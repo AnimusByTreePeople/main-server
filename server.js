@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const accountRoutes = require("./routes/accounts");
+const mapRoutes = require("./routes/maps");
 const cors = require("cors");
 
 const app = express();
@@ -28,3 +29,4 @@ mongoose
   });
 
 app.use("/api/accounts", accountRoutes);
+app.use("/api/maps", mapRoutes);

@@ -1,10 +1,22 @@
 const Account = require("../models/accountModel");
-const mongoose = require("mongoose");
 //get accounts
 const getAccounts = async (req, res) => {
   const accounts = await Account.find({}).sort({ createdAt: -1 });
   res.status(200).json(accounts);
 };
+const getBagCount = async (req, res) => {
+  const bags = await Account.find({}).sort({ bagCount: -1 });
+  console.log(bags);
+  const count = bags.reduce(addCount, 0);
+  const out = {
+    bagCount: count,
+    highest: { name: bags[0].name, count: bags[0].bagCount },
+  };
+  res.status(200).json(out);
+  //returns the total number of bags and the highest bag count owner
+};
+//taking the bag count and summing up the total
+const addCount = (total, currentAcc) => total + currentAcc.bagCount;
 //get one account
 const getAccount = async (req, res) => {
   const { uid } = req.params;
@@ -104,4 +116,5 @@ module.exports = {
   updateAccount,
   getAccountByMob,
   updateAccountByMob,
+  getBagCount,
 };

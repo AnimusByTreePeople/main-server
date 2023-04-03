@@ -7,13 +7,15 @@ const {
   updateAccount,
   getAccountByMob,
   updateAccountByMob,
+  getBagCount,
 } = require("../Controllers/accountControllers");
 
-const { createMap, upload } = require("../Controllers/mapControllers");
+const { createMap, upload, getMaps } = require("../Controllers/mapControllers");
 
 const router = express.Router();
 
 router.get("/", getAccounts);
+router.get("/bagcount/", getBagCount);
 
 //get one account
 router.get("/:uid", getAccount);
@@ -27,7 +29,5 @@ router.delete("/:uid", (req, res) => {
 
 router.put("/:uid", updateAccount);
 router.put("/mobile/:mobile", updateAccountByMob);
-
-router.post("/maps/:uid", upload.single("maps"), createMap);
 
 module.exports = router;
